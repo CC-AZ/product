@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Product Showcase</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#016EF9',
+                        'primary-pink': '#F924B2'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for the page */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Default background for larger screens */
+            background-image: url('https://claytoncorey.com/product/files/wallpaper.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Mobile background image for screens up to 768px */
+        @media (max-width: 780px) {
+            body {
+                background-image: url('https://claytoncorey.com/product/files/wallpaper-mobile.png'); /* Placeholder for mobile background */
+            }
+        }
+
+        /* Keyframe animation for the floating effect */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Applying the animation to the cards */
+        .card-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Staggering the animation for a more dynamic feel */
+        .card-float:nth-child(2) {
+            animation-delay: 2s;
+        }
+        .card-float:nth-child(3) {
+            animation-delay: 4s;
+        }
+        
+        /* Styles for the sliding donate panel */
+        #donate-panel {
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 320px;
+            z-index: 50;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%); /* Start off-screen to the right */
+        }
+
+        #donate-panel.is-open {
+            transform: translateX(0); /* Slide in */
+        }
+
+        /* Custom style for the soft glow effect */
+        .soft-glow-text {
+            filter: drop-shadow(0 0 5px var(--tw-primary-pink));
+        }
+    </style>
+</head>
+<body class="text-white overflow-x-hidden bg-scroll min-h-screen">
+
+    <!-- Donate Button - Positioned in the top right -->
+    <button id="toggle-donate" class="fixed top-6 right-6 z-50 bg-gradient-to-r from-primary-blue to-primary-pink hover:from-[#0158D0] hover:to-[#E119A5] text-white font-semibold py-2 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105 duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 inline-block -mt-1 mr-2">
+            <path d="M11.666 4.636a1.5 1.5 0 0 1 2.668 0l1.433 2.768c.288.556.84.887 1.458.948l3.056.273a1.5 1.5 0 0 1 .843 2.607l-2.28 2.054a1.5 1.5 0 0 1-.497 1.458l.497 3.018a1.5 1.5 0 0 1-2.26 1.638l-2.617-1.428a1.5 1.5 0 0 1-1.558 0l-2.617 1.428a1.5 1.5 0 0 1-2.26-1.638l.497-3.018a1.5 1.5 0 0 1-.497-1.458l-2.28-2.054a1.5 1.5 0 0 1 .843-2.607l3.056-.273c.618-.061 1.17-.392 1.458-.948l1.433-2.768Z" />
+        </svg>
+        Donate
+    </button>
+
+    <!-- Sliding Donate Panel -->
+    <div id="donate-panel" class="fixed bg-gray-800/80 backdrop-blur-lg border-l border-gray-700 shadow-xl flex flex-col items-center justify-center p-8 text-center transition-transform">
+        <button id="close-donate-panel" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <h3 class="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary-blue to-primary-pink">
+            Support My Work
+        </h3>
+        <p class="text-gray-300 mb-6">
+            Your donation helps me keep the lights on and build more cool stuff for you to enjoy.
+        </p>
+        <a href="https://www.paypal.com/donate/?hosted_button_id=SVT92UBYWW63L" target="_blank" class="w-full bg-primary-blue hover:bg-[#0158D0] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">
+            Donate Now
+        </a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-6 py-16 md:py-20">
+
+        <!-- Header Section -->
+        <header class="text-center mb-8 md:mb-12">
+            <!-- Your Logo -->
+            <img src="https://claytoncorey.com/product/files/logo.png" alt="Clayton Corey Consulting, LLC. Logo" class="w-32 h-32 rounded-full mx-auto mb-4">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-1 text-white soft-glow-text mt-8">
+                Clayton Corey Consulting, LLC.
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 text-white">
+                Product Showcase
+            </h2>
+            <p class="text-base md:text-lg text-gray-300 max-w-4xl mx-auto mt-4">
+                Hello, I'm Clayton Corey. I vibe code to create solutions, building innovative software and applications.
+                With 15+ years of experience in enterprise systems and product management, I consistently start by collecting user pain points and feedback to ensure my work solves a problem. This foundational approach aligns with industry best practices that emphasize understanding customer needs and developing solutions that address specific challenges and deliver real value.
+            </p>
+        </header>
+
+        <!-- Grid for Product Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <!-- =============================================================== -->
+            <!-- Product Card 1: You can copy and paste this block to add more   -->
+            <!-- =============================================================== -->
+            <div class="card-float bg-gray-800/50 backdrop-blur-sm border border-primary-pink rounded-xl shadow-2xl shadow-primary-blue/10 overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <!-- Product Image -->
+                <img src="https://claytoncorey.com/product/files/efh.png" 
+                     alt="Product One Screenshot" 
+                     class="w-full h-48 object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/0f172a/FFFFFF?text=Image+Not+Found';">
+                
+                <div class="p-6">
+                    <!-- Product Title -->
+                    <h2 class="text-2xl font-bold mb-2 text-white">Explore Fountain Hills</h2>
+                    <!-- Product Description -->
+                    <p class="text-gray-400 mb-4">
+                        A guide to Fountain Hills, Arizona.
+                    </p>
+                    <!-- Product Link/Button -->
+                    <a href="https://claytoncorey.com/product/ExploreFH/" class="inline-block bg-primary-blue hover:bg-[#0158D0] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                        Explore
+                    </a>
+                </div>
+            </div>
+            <!-- End of Product Card 1 -->
+
+            <!-- =============================================================== -->
+            <!-- Product Card 1.5: You can copy and paste this block to add more   -->
+            <!-- =============================================================== -->
+            <div class="card-float bg-gray-800/50 backdrop-blur-sm border border-primary-pink rounded-xl shadow-2xl shadow-primary-blue/10 overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <!-- Product Image -->
+                <img src="https://claytoncorey.com/product/files/fb.png" 
+                     alt="Product Three Screenshot" 
+                     class="w-full h-48 object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/0f172a/FFFFFF?text=Image+Not+Found';">
+
+                <div class="p-6">
+                    <!-- Product Title -->
+                    <h2 class="text-2xl font-bold mb-2 text-white">Feedbaq</h2>
+                    <!-- Product Description -->
+                    <p class="text-gray-400 mb-4">
+                        Collect user satisfaction and feedback.
+                    </p>
+                    <!-- Product Link/Button -->
+                    <a href="https://studio--quickfeedback-gl5s5.us-central1.hosted.app" class="inline-block bg-primary-blue hover:bg-[#0158D0] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                        Learn
+                    </a>
+                </div>
+            </div>
+            <!-- End of Product Card 1.5 -->
+
+            <!-- =============================================================== -->
+            <!-- Product Card 2: You can copy and paste this block to add more   -->
+            <!-- =============================================================== -->
+            <div class="card-float bg-gray-800/50 backdrop-blur-sm border border-primary-pink rounded-xl shadow-2xl shadow-primary-pink/10 overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <!-- Product Image -->
+                <img src="https://claytoncorey.com/product/files/gt.png" 
+                     alt="Product Two Screenshot" 
+                     class="w-full h-48 object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/0f172a/FFFFFF?text=Image+Not+Found';">
+
+                <div class="p-6">
+                    <!-- Product Title -->
+                    <h2 class="text-2xl font-bold mb-2 text-white">GymTrack</h2>
+                    <!-- Product Description -->
+                    <p class="text-gray-400 mb-4">
+                        Simple gym workout tracker using local storage.
+                    </p>
+                    <!-- Product Link/Button -->
+                    <a href="https://claytoncorey.com/coding/gymtrack/" class="inline-block bg-primary-pink hover:bg-[#E119A5] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                        Try it Out
+                    </a>
+                </div>
+            </div>
+            <!-- End of Product Card 2 -->
+
+            <!-- =============================================================== -->
+            <!-- Product Card 3: You can copy and paste this block to add more   -->
+            <!-- =============================================================== -->
+            <div class="card-float bg-gray-800/50 backdrop-blur-sm border border-primary-pink rounded-xl shadow-2xl shadow-primary-blue/10 overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <!-- Product Image -->
+                <img src="https://claytoncorey.com/product/files/pem.png" 
+                     alt="Product Three Screenshot" 
+                     class="w-full h-48 object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/0f172a/FFFFFF?text=Image+Not+Found';">
+
+                <div class="p-6">
+                    <!-- Product Title -->
+                    <h2 class="text-2xl font-bold mb-2 text-white">Product Engineering Metrics</h2>
+                    <!-- Product Description -->
+                    <p class="text-gray-400 mb-4">
+                        A simple and fun way to learn about KPIs and metrics.
+                    </p>
+                    <!-- Product Link/Button -->
+                    <a href="https://claytoncorey.com/product/ProductEngineeringMetrics/" class="inline-block bg-primary-blue hover:bg-[#0158D0] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                        Learn
+                    </a>
+                </div>
+            </div>
+            <!-- End of Product Card 3 -->
+
+            <!-- =============================================================== -->
+            <!-- Product Card 4: You can copy and paste this block to add more   -->
+            <!-- =============================================================== -->
+            <div class="card-float bg-gray-800/50 backdrop-blur-sm border border-primary-pink rounded-xl shadow-2xl shadow-primary-pink/10 overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <!-- Product Image -->
+                <img src="https://claytoncorey.com/product/files/ps.png" 
+                     alt="Product Three Screenshot" 
+                     class="w-full h-48 object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/0f172a/FFFFFF?text=Image+Not+Found';">
+
+                <div class="p-6">
+                    <!-- Product Title -->
+                    <h2 class="text-2xl font-bold mb-2 text-white">Product Health Scorecard</h2>
+                    <!-- Product Description -->
+                    <p class="text-gray-400 mb-4">
+                        Turn complex development data into a clear story of business value.
+                    </p>
+                    <!-- Product Link/Button -->
+                    <a href="https://claytoncorey.com/product/prodops/" class="inline-block bg-primary-pink hover:bg-[#E119A5] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                        Check it Out
+                    </a>
+                </div>
+            </div>
+            <!-- End of Product Card 4 -->
+
+        </div>
+        <!-- End of Grid -->
+
+    </div>
+    <!-- End of Container -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const donatePanel = document.getElementById('donate-panel');
+            const toggleDonateButton = document.getElementById('toggle-donate');
+            const closeDonateButton = document.getElementById('close-donate-panel');
+
+            // Function to toggle the donate panel's visibility
+            const toggleDonatePanel = () => {
+                donatePanel.classList.toggle('is-open');
+            };
+
+            // Event listeners for the donate buttons
+            toggleDonateButton.addEventListener('click', toggleDonatePanel);
+            closeDonateButton.addEventListener('click', toggleDonatePanel);
+        });
+    </script>
+</body>
+</html>
